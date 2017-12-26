@@ -23,6 +23,7 @@ export default class Navigator extends React.Component {
                             <NavLink to="/app/sectorNodes">Sector Nodes</NavLink>
                             <NavLink to="/app/planets">Planets</NavLink>
                             <NavLink to="/app/factions">Factions</NavLink>
+                            <NavLink to="/app/campaigns">Campaigns</NavLink>
                         </NavGroup>
 
                         <NavGroup title="Developers">

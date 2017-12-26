@@ -24,6 +24,8 @@ import Planet from "./app/Planet";
 import PlanetsView from "./app/Planets";
 import Faction from "./app/Faction";
 import FactionsView from "./app/Factions";
+import Campaign from "./app/Campaign";
+import CampaignsView from "./app/Campaigns";
 
 export default class Layout extends React.Component {
   render() {
@@ -71,6 +73,10 @@ export default class Layout extends React.Component {
                 <Route exact path="/app/factions" component={FactionsView}></Route>
                 <Route exact path="/app/faction/" component={Faction}></Route>
                 <Route exact path="/app/faction/:unid" component={Faction}></Route>
+
+                <Route exact path="/app/campaigns" component={CampaignsView}></Route>
+                <Route exact path="/app/campaign/" component={Campaign}></Route>
+                <Route exact path="/app/campaign/:unid" component={Campaign}></Route>
 
                 <Route exact path="/admin/console" component={AdminConsole}></Route>
               </Switch>
