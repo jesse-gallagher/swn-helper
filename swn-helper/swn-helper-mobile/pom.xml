@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>frostillicus.swn</groupId>
 		<artifactId>swn-helper</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
 	<artifactId>swn-helper-mobile</artifactId>
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>frostillicus.swn</groupId>
 			<artifactId>swn-helper-shared</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	

@@ -4,10 +4,10 @@ Bundle-Activator: frostillicus.swn.app.AppActivator
 Bundle-ManifestVersion: 2
 Bundle-Name: Stars Without Number Helper
 Bundle-SymbolicName: frostillicus.swn.domino;singleton:=true
-Bundle-Version: 0.0.1.qualifier
+Bundle-Version: 1.0.0.qualifier
 DARWINO_VERSION: 2.1.0-SNAPSHOT
 Export-Package: frostillicus.swn.app;version="0.0.1",frostillicus.swn.ap
- p.xsp;version="0.0.1"
+ p.xsp;version="1.0.0"
 Include-Resource: plugin.xml=plugin.xml
 Private-Package: plugin.xml
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",com.ibm.

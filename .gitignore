@@ -22,8 +22,10 @@
 hs_err_pid*
 
 *.versionChangeBackup
+*.versionsBackup
 .classpath
 .settings/
 .project
 target/
 package-lock.json
+node_modules/
