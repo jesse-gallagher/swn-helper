@@ -1,7 +1,3 @@
-/* 
- * (c) Copyright Darwino Inc. 2014-2017.
- */
-
 import React from "react";
 import { Link } from 'react-router-dom';
 
