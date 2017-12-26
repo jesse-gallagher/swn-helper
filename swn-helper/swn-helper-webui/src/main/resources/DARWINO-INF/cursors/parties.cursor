@@ -2,9 +2,10 @@
   "store": "_default",
   "extract": {
     "unid": "_unid",
-    "cdate": "_cdate"
+    "cdate": "_cdate",
+    "name": "name"
   },
-  //"query": "{form: 'myform'}",
+  "query": "{form: 'Party'}",
   "options": "DATA_MODDATES",
-  "orderBy": "_unid"
+  "orderBy": "name"
 }

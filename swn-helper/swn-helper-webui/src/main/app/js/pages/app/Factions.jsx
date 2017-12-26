@@ -1,6 +1,3 @@
-/* 
- * (c) Copyright Darwino Inc. 2014-2017.
- */
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -8,43 +5,34 @@ import { CursorPage, CursorGrid} from '@darwino/darwino-react-bootstrap'
 
 import Constants from "./Constants";
 
-
-//
-// Resusable grid component that can be embedded in other pages
-// The component carries its own property values and can contribute to the main page
-//
-export class SampleViewGrid extends CursorGrid {
+export class FactionsViewGrid extends CursorGrid {
 
     // Default values of the properties
     static defaultProps  = {
         databaseId: Constants.DATABASE,
         params: {
-            name: "AllDocuments"
+            name: "factions"
         },
         ftSearch:true,
         grid: {
             columns:[
-                {name: "UNID", key: "unid"},
+                {name: "Name", key: "name"},
                 {name: "Creation Date", key: "cdate"}
             ]
         },
-        baseRoute: "/app/doc"
+        baseRoute: "/app/faction"
     }
 
     contributeActionBar() {
         return (
             <div key="main">
-                <Link to={`${this.props.baseRoute}`} className="btn btn-primary">Create New Document</Link>
+                <Link to={`${this.props.baseRoute}`} className="btn btn-primary">Create New Faction</Link>
             </div>
         );
     }
 }
 
-
-//
-// Main frame that displays the grid in a page, with an action bar
-//
-export default class SampleView extends CursorPage {
+export default class FactionsVIew extends CursorPage {
 
     constructor(props,context) {
         super(props,context)
@@ -53,10 +41,10 @@ export default class SampleView extends CursorPage {
     render() {
         return (
             <div>
-                <h4>All Documents</h4>
+                <h4>Factions</h4>
                 {this.createActionBar()}
                 <div>
-                    <SampleViewGrid height={this.state.gridHeight}/>
+                    <FactionsViewGrid height={this.state.gridHeight}/>
                 </div>
             </div>
         )

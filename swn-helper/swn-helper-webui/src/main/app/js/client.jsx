@@ -50,7 +50,7 @@ const renderingOptions = {
     footerInverted: false,
     leftnavInverted: false,
 }
-import 'bootswatch/paper/bootstrap.min.css';
+import 'bootswatch/yeti/bootstrap.min.css';
 
 //import 'bootswatch/simplex/bootstrap.min.css';
 
@@ -69,7 +69,7 @@ import {DEV_OPTIONS,initDevOptions} from '@darwino/darwino';
 let composeEnhancers;
 if(process.env.NODE_ENV!="production") {
     composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    initDevOptions("http://localhost:8080//swnhelper/")
+    initDevOptions("http://localhost:8081/swnhelper/")
 } else {
     composeEnhancers = compose;
 }

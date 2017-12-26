@@ -1,7 +1,3 @@
-/* 
- * (c) Copyright Darwino Inc. 2014-2017.
- */
-
 import React, { Component } from "react";
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
@@ -18,9 +14,9 @@ import Constants from "./Constants";
 const DATABASE = Constants.DATABASE;
 const STORE = "_default";
 
-const FORM_NAME = "SampleForm";
+const FORM_NAME = "SectorNode";
 
-export class SampleForm extends DocumentForm {
+export class SectorNodeForm extends DocumentForm {
 
     // Default values of the properties
     static defaultProps  = {
@@ -32,14 +28,9 @@ export class SampleForm extends DocumentForm {
         super(props)
     }
 
-    handleActionClick() {
-        alert("You clicked me!");
-    }
-
     createActionBar() {
         return (
             <div className="action-bar">
-                <Button onClick={() => {this.handleActionClick()}}>Action Button</Button>
             </div>
         );
     }
@@ -56,7 +47,7 @@ export class SampleForm extends DocumentForm {
 
     // Default values when a new document is created
     defaultValues(values) {
-        //values.form = "MyForm"
+        values.form = FORM_NAME;
     }
 
     // Values computed once when the document is loaded
@@ -92,14 +83,10 @@ export class SampleForm extends DocumentForm {
                         )}
                     />                    
                     <fieldset>
-                        <legend>Document</legend>
+                        <legend>Sector Node</legend>
 
                         <div className="col-md-12 col-sm-12">
-                            <ComputedField label="UNID" value={this.state.unid}/>                        
-                        </div>
-
-                        <div className="col-md-12 col-sm-12">
-                            <Field name="myfield" type="text" component={renderField} label="My Field" disabled={disabled} readOnly={readOnly}/>
+                            <Field name="name" type="text" component={renderField} label="Name" disabled={disabled} readOnly={readOnly}/>
                         </div>
 
                         <div>
@@ -129,5 +116,5 @@ const form = reduxForm({
 
 export default withRouter(
     connect(null,DocumentForm.mapDispatchToProps)
-        (form(SampleForm))
+        (form(SectorNodeForm))
 )
