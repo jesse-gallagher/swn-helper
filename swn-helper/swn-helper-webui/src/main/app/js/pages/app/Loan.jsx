@@ -5,7 +5,6 @@ import { Field, reduxForm } from 'redux-form';
 import { Link, Prompt } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
-import { Jsql } from '@darwino/darwino';
 import {JsonDebug} from "@darwino/darwino-react";
 import { DocumentForm, ComputedField,
          renderField, renderRadioGroup, renderCheckbox, renderSelect, renderRichText, renderDatePicker } from '@darwino/darwino-react-bootstrap';
@@ -15,9 +14,9 @@ import Constants from "./Constants";
 const DATABASE = Constants.DATABASE;
 const STORE = "_default";
 
-const FORM_NAME = "Campaign";
+const FORM_NAME = "Loan";
 
-export class CampaignForm extends DocumentForm {
+export class LoanForm extends DocumentForm {
 
     // Default values of the properties
     static defaultProps  = {
@@ -27,14 +26,6 @@ export class CampaignForm extends DocumentForm {
 
     constructor(props) {
         super(props)
-
-        new Jsql()
-            .database(props.databaseId)
-            .query("SELECT $.name name, _unid FROM _default WHERE $.form='Character' ORDER BY name")
-            .fetch()
-            .then((json) => {
-                this.setState({allCharacters: json.map((val) => { return {label: val.name, value: val.unid} })})
-            })
     }
 
     createActionBar() {
@@ -92,14 +83,10 @@ export class CampaignForm extends DocumentForm {
                         )}
                     />                    
                     <fieldset>
-                        <legend>Campaign</legend>
+                        <legend>Loan</legend>
 
                         <div className="col-md-12 col-sm-12">
                             <Field name="name" type="text" component={renderField} label="Name" disabled={disabled} readOnly={readOnly}/>
-                        </div>
-                        <div className="col-md-12 col-sm-12">
-                            <Field name="characters" type="checkbox" component={renderCheckbox} label="Characters" multiple={true} disabled={disabled} readOnly={readOnly}
-                                options={this.state.allCharacters}/>
                         </div>
 
                         <div>
@@ -129,5 +116,5 @@ const form = reduxForm({
 
 export default withRouter(
     connect(null,DocumentForm.mapDispatchToProps)
-        (form(CampaignForm))
+        (form(LoanForm))
 )

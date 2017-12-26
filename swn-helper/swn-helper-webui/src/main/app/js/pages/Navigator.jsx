@@ -14,17 +14,16 @@ export default class Navigator extends React.Component {
                     <Nav>
                         <NavLink to="/" exact={true}>Home</NavLink>
 
-                        <NavGroup title="Entities" collapsible={true} defaultExpanded={true}>
-                            <NavLink to="/app/parties">Parties</NavLink>
-                            <NavLink to="/app/players">Players</NavLink>
-                            <NavLink to="/app/characters">Characters</NavLink>
-                            <NavLink to="/app/ships">Ships</NavLink>
-                            <NavLink to="/app/sectors">Sectors</NavLink>
-                            <NavLink to="/app/sectorNodes">Sector Nodes</NavLink>
-                            <NavLink to="/app/planets">Planets</NavLink>
-                            <NavLink to="/app/factions">Factions</NavLink>
-                            <NavLink to="/app/campaigns">Campaigns</NavLink>
-                        </NavGroup>
+                        <NavLink to="/app/players">Players</NavLink>
+                        <NavLink to="/app/parties">Parties</NavLink>
+                        <NavLink to="/app/characters">Characters</NavLink>
+                        <NavLink to="/app/ships">Ships</NavLink>
+                        <NavLink to="/app/sectors">Sectors</NavLink>
+                        <NavLink to="/app/sectorNodes">Sector Nodes</NavLink>
+                        <NavLink to="/app/planets">Planets</NavLink>
+                        <NavLink to="/app/factions">Factions</NavLink>
+                        <NavLink to="/app/campaigns">Campaigns</NavLink>
+                        <NavLink to="/app/loans">Loans</NavLink>
 
                         <NavGroup title="Developers">
                             <NavLink to="/admin/console">Console</NavLink>

@@ -10,13 +10,13 @@ import Constants from "./Constants";
 // Resusable grid component that can be embedded in other pages
 // The component carries its own property values and can contribute to the main page
 //
-export class CampaignsViewGrid extends CursorGrid {
+export class LoansViewGrid extends CursorGrid {
 
     // Default values of the properties
     static defaultProps  = {
         databaseId: Constants.DATABASE,
         params: {
-            name: "campaigns"
+            name: "loans"
         },
         ftSearch:true,
         grid: {
@@ -25,13 +25,13 @@ export class CampaignsViewGrid extends CursorGrid {
                 {name: "Creation Date", key: "cdate"}
             ]
         },
-        baseRoute: "/app/campaign"
+        baseRoute: "/app/loan"
     }
 
     contributeActionBar() {
         return (
             <div key="main">
-                <Link to={`${this.props.baseRoute}`} className="btn btn-primary">Create New Campaign</Link>
+                <Link to={`${this.props.baseRoute}`} className="btn btn-primary">Create New Loan</Link>
             </div>
         );
     }
@@ -41,7 +41,7 @@ export class CampaignsViewGrid extends CursorGrid {
 //
 // Main frame that displays the grid in a page, with an action bar
 //
-export default class CampaignsView extends CursorPage {
+export default class LoansView extends CursorPage {
 
     constructor(props,context) {
         super(props,context)
@@ -50,10 +50,10 @@ export default class CampaignsView extends CursorPage {
     render() {
         return (
             <div>
-                <h4>Campaigns</h4>
+                <h4>Loans</h4>
                 {this.createActionBar()}
                 <div>
-                    <CampaignsViewGrid height={this.state.gridHeight}/>
+                    <LoansViewGrid height={this.state.gridHeight}/>
                 </div>
             </div>
         )

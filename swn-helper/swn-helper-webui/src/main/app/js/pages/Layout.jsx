@@ -26,6 +26,8 @@ import Faction from "./app/Faction";
 import FactionsView from "./app/Factions";
 import Campaign from "./app/Campaign";
 import CampaignsView from "./app/Campaigns";
+import Loan from "./app/Loan";
+import LoansView from "./app/Loans";
 
 export default class Layout extends React.Component {
   render() {
@@ -77,6 +79,10 @@ export default class Layout extends React.Component {
                 <Route exact path="/app/campaigns" component={CampaignsView}></Route>
                 <Route exact path="/app/campaign/" component={Campaign}></Route>
                 <Route exact path="/app/campaign/:unid" component={Campaign}></Route>
+
+                <Route exact path="/app/loans" component={LoansView}></Route>
+                <Route exact path="/app/loan/" component={Loan}></Route>
+                <Route exact path="/app/loan/:unid" component={Loan}></Route>
 
                 <Route exact path="/admin/console" component={AdminConsole}></Route>
               </Switch>
