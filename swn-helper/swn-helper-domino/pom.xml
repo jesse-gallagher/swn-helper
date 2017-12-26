@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>frostillicus.swn</groupId>
+		<artifactId>swn-helper</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>swn-helper-domino</artifactId>
+	
+	<packaging>bundle</packaging>
+	<name>Stars Without Number Helper</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.darwino</groupId>
+			<artifactId>dwo-jre-platform</artifactId>
+			<version>${DARWINO_VERSION}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.darwino.domino</groupId>
+			<artifactId>com.darwino.domino.libs</artifactId>
+			<version>${DARWINO_VERSION}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.darwino.domino</groupId>
+			<artifactId>com.darwino.domino.platform</artifactId>
+			<version>${DARWINO_VERSION}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.darwino</groupId>
+			<artifactId>dwo-jre-j2ee-platform</artifactId>
+			<version>${DARWINO_VERSION}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.darwino</groupId>
+			<artifactId>dwo-web-darwino</artifactId>
+			<version>${DARWINO_VERSION}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>frostillicus.swn</groupId>
+			<artifactId>swn-helper-shared</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>frostillicus.swn</groupId>
+			<artifactId>swn-helper-webui</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.core</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<version>3.6.0.v20100505</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.xsp</groupId>
+			<artifactId>com.ibm.domino.xsp.adapter</artifactId>
+			<classifier>lwpd.domino.adapter</classifier>
+			<version>9.0.1.20140404-1000</version>
+		</dependency>
+	</dependencies>
+	
+	<build>
+ 		<resources>
+ 			<resource>
+ 				<directory>${project.basedir}</directory>
+ 				<includes>
+ 					<include>plugin.xml</include>
+ 				</includes>
+ 			</resource>
+ 			<resource>
+ 				<directory>${project.basedir}/src/main/resources</directory>
+ 				<includes>
+ 					<include>**/*</include>
+ 				</includes>
+ 			</resource>
+ 		</resources>
+ 		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>frostillicus.swn.domino;singleton:=true</Bundle-SymbolicName>
+						<Require-Bundle>
+							org.eclipse.core.runtime;bundle-version="3.4.0",
+							com.ibm.notes.java.api;resolution:=optional,
+							com.ibm.pvc.servlet,
+							com.ibm.domino.xsp.adapter,
+							com.darwino.domino.libs,
+							com.darwino.domino.platform,
+							frostillicus.swn.shared,
+							frostillicus.swn.webui
+						</Require-Bundle>
+						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+						<Bundle-Activator>frostillicus.swn.app.AppActivator</Bundle-Activator>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

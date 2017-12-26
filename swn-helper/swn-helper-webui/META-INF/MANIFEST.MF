@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: swn-helper-webui
+Bundle-SymbolicName: frostillicus.swn.webui;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+DARWINO_VERSION: 2.1.0-SNAPSHOT
+Include-Resource: DARWINO-INF/cursors/AllDocuments.cursor=src/main/resou
+ rces/DARWINO-INF/cursors/AllDocuments.cursor,DARWINO-INF/resources/inde
+ x.html=src/main/resources/DARWINO-INF/resources/index.html
+Private-Package: DARWINO-INF.cursors,DARWINO-INF.resources
+Require-Bundle: com.darwino.domino.libs,com.darwino.domino.platform,fros
+ tillicus.swn.shared
