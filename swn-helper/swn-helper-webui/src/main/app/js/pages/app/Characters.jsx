@@ -22,6 +22,7 @@ export class CharactersViewGrid extends CursorGrid {
         grid: {
             columns:[
                 {name: "Name", key: "name"},
+                {name: "Player", key: "playerId"},
                 {name: "Creation Date", key: "cdate"}
             ]
         },

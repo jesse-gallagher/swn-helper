@@ -50,11 +50,11 @@ export default class Layout extends React.Component {
 
                 <Route exact path="/app/characters" component={CharactersView}></Route>
                 <Route exact path="/app/character/" component={Character}></Route>
-                <Route exact path="/app/characters/:unid" component={Character}></Route>
+                <Route exact path="/app/character/:unid" component={Character}></Route>
 
                 <Route exact path="/app/ships" component={ShipsView}></Route>
                 <Route exact path="/app/ship/" component={Ship}></Route>
-                <Route exact path="/app/ships/:unid" component={Ship}></Route>
+                <Route exact path="/app/ship/:unid" component={Ship}></Route>
 
                 <Route exact path="/app/sectors" component={SectorsView}></Route>
                 <Route exact path="/app/sector/" component={Sector}></Route>

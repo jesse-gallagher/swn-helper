@@ -5,7 +5,8 @@ import { Field, reduxForm } from 'redux-form';
 import { Link, Prompt } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
-import {JsonDebug} from "@darwino/darwino-react";
+import { Jsql } from '@darwino/darwino';
+import { JsonDebug } from "@darwino/darwino-react";
 import { DocumentForm, ComputedField,
          renderField, renderRadioGroup, renderCheckbox, renderSelect, renderRichText, renderDatePicker } from '@darwino/darwino-react-bootstrap';
 
@@ -26,6 +27,15 @@ export class CharacterForm extends DocumentForm {
 
     constructor(props) {
         super(props)
+
+        new Jsql()
+            .database(props.databaseId)
+            .query("SELECT $.name name, _unid FROM _default WHERE $.form='Player' ORDER BY name")
+            .fetch()
+            .then((json) => {
+                console.log("Setting state", json)
+                this.setState({allPlayers: json.map((val) => { return {label: val.name, value: val.unid} })})
+            })
     }
 
     createActionBar() {
@@ -63,7 +73,11 @@ export class CharacterForm extends DocumentForm {
     // Validation
     validate(values) {
         const errors = {};
-        // Add the validation rules here!
+        
+        if(!values.playerId) {
+            errors.playerId = "Missing Player";
+        }
+
         return errors;
     }    
 
@@ -87,6 +101,10 @@ export class CharacterForm extends DocumentForm {
 
                         <div className="col-md-12 col-sm-12">
                             <Field name="name" type="text" component={renderField} label="Name" disabled={disabled} readOnly={readOnly}/>
+                        </div>
+                        <div className="col-md-12 col-sm-12">
+                            <Field name="playerId" type="text" component={renderSelect} label="Player" disabled={disabled} readOnly={readOnly}
+                                options={this.state.allPlayers} emptyOption={true}/>
                         </div>
 
                         <div>

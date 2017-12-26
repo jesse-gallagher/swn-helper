@@ -1,7 +1,3 @@
-/* 
- * (c) Copyright Darwino Inc. 2014-2017.
- */
-
 import React from "react";
 import ReactDOM from "react-dom";
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
@@ -26,33 +22,12 @@ import 'whatwg-fetch'
 
 import 'font-awesome/css/font-awesome.css';
 
-// test
-//
-// Use a Bootstrap theme
-// Can be the default bootstrap, a bootswatch one (https://bootswatch.com/), or any other!
-
-// const renderingOptions = {
-//     headerInverted: true,
-//     footerInverted: false,
-//     leftnavInverted: false,
-// }
-//import 'bootstrap/dist/css/bootstrap.css';
-
-// const renderingOptions = {
-//     headerInverted: true,
-//     footerInverted: false,
-//     leftnavInverted: false,
-// }
-// import 'bootswatch/superhero/bootstrap.min.css';
-
 const renderingOptions = {
     headerInverted: true,
     footerInverted: false,
     leftnavInverted: false,
 }
-import 'bootswatch/yeti/bootstrap.min.css';
-
-//import 'bootswatch/simplex/bootstrap.min.css';
+import 'bootswatch/cosmo/bootstrap.min.css';
 
 
 

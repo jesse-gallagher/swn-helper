@@ -3,7 +3,8 @@
   "extract": {
     "unid": "_unid",
     "cdate": "_cdate",
-    "name": "name"
+    "name": "name",
+    "playerId": "playerId"
   },
   "query": "{form: 'Character'}",
   "options": "DATA_MODDATES",
