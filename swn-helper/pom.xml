@@ -8,6 +8,7 @@
 
 	<packaging>pom</packaging>
 	<modules>
+		<module>darwino-jnosql-diana-driver</module>
 		<module>swn-helper-shared</module>
 		<module>swn-helper-webui</module>
 		<module>swn-helper-j2ee</module>
@@ -17,7 +18,7 @@
 		<module>swn-helper-android-hybrid</module>
 		<module>swn-helper-moe-hybrid</module>
 		<module>swn-helper-swt-hybrid</module>
-  </modules>
+	</modules>
 
 	<properties>
 		<DARWINO_VERSION>2.1.0-SNAPSHOT</DARWINO_VERSION>
@@ -99,8 +100,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>1.8</source>
+						<target>1.8</target>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -176,7 +177,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
