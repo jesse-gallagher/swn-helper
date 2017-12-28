@@ -93,5 +93,12 @@
 		    <version>2.5</version>
 		    <scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.darwino</groupId>
+			<artifactId>dwo-jre-jdbc-drivers-postgresql</artifactId>
+			<version>${DARWINO_VERSION}</version>
+		    <scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

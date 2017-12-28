@@ -8,6 +8,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.darwino.jsonstore.Database;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -27,31 +29,36 @@ import static org.junit.Assert.assertTrue;
 public class DocumentQueryTest extends AbstractDarwinoAppTest  {
 
     public static final String COLLECTION_NAME = "person";
+    static String id1 = "id1" + System.nanoTime();
+    static String id2 = "id2" + System.nanoTime();
+    static String id3 = "id3" + System.nanoTime();
+    static String id4 = "id4" + System.nanoTime();
     private DarwinoDocumentCollectionManager entityManager;
 
     {
         DarwinoDocumentConfiguration configuration = new DarwinoDocumentConfiguration();
         DarwinoDocumentCollectionManagerFactory managerFactory = configuration.get();
-        entityManager = managerFactory.get("default");
+        entityManager = managerFactory.get(Database.STORE_DEFAULT);
     }
 
     @AfterClass
     public static void afterClass() {
     }
+    
 
     @BeforeClass
     public static void beforeClass() throws InterruptedException {
         DarwinoDocumentConfiguration configuration = new DarwinoDocumentConfiguration();
         DarwinoDocumentCollectionManagerFactory managerFactory = configuration.get();
-        DarwinoDocumentCollectionManager entityManager = managerFactory.get("default");
+        DarwinoDocumentCollectionManager entityManager = managerFactory.get(Database.STORE_DEFAULT);
 
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id")
+        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", id1)
                 , Document.of("name", "name")));
-        DocumentEntity entity2 = DocumentEntity.of("person", asList(Document.of("_id", "id2")
+        DocumentEntity entity2 = DocumentEntity.of("person", asList(Document.of("_id", id2)
                 , Document.of("name", "name")));
-        DocumentEntity entity3 = DocumentEntity.of("person", asList(Document.of("_id", "id3")
+        DocumentEntity entity3 = DocumentEntity.of("person", asList(Document.of("_id", id3)
                 , Document.of("name", "name")));
-        DocumentEntity entity4 = DocumentEntity.of("person", asList(Document.of("_id", "id4")
+        DocumentEntity entity4 = DocumentEntity.of("person", asList(Document.of("_id", id4)
                 , Document.of("name", "name3")));
 
         entityManager.insert(Arrays.asList(entity, entity2, entity3, entity4));
@@ -63,7 +70,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
     @Test
     public void shouldShouldDefineLimit() {
 
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id")
+        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", id1)
                 , Document.of("name", "name")));
 
         Optional<Document> name = entity.find("name");
@@ -80,7 +87,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
 
     @Test
     public void shouldShouldDefineStart()  {
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id")
+        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", id1)
                 , Document.of("name", "name")));
 
         Optional<Document> name = entity.find("name");
@@ -97,7 +104,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
     @Test
     public void shouldShouldDefineLimitAndStart() {
 
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id")
+        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", id1)
                 , Document.of("name", "name")));
 
         Optional<Document> name = entity.find("name");
@@ -115,7 +122,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
 
     @Test
     public void shouldSelectAll(){
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id")
+        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", id1)
                 , Document.of("name", "name")));
 
 
@@ -129,8 +136,8 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
 
     @Test
     public void shouldFindDocumentByName() {
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id4")
-                , Document.of("name", "name3"), Document.of("_key", "person:id4")));
+        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", id4)
+                , Document.of("name", "name3")));
 
         Optional<Document> name = entity.find("name");
         DocumentQuery query = select().from(COLLECTION_NAME).where(eq(name.get())).build();
@@ -141,8 +148,8 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
 
     @Test
     public void shouldFindDocumentByNameSortAsc() {
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id4")
-                , Document.of("name", "name3"), Document.of("_key", "person:id4")));
+        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", id4)
+                , Document.of("name", "name3")));
 
         Optional<Document> name = entity.find("name");
 
@@ -162,8 +169,8 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
 
     @Test
     public void shouldFindDocumentByNameSortDesc() {
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id4")
-                , Document.of("name", "name3"), Document.of("_key", "person:id4")));
+        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", id4)
+                , Document.of("name", "name3")));
 
         Optional<Document> name = entity.find("name");
 
@@ -184,28 +191,14 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
 
     @Test
     public void shouldFindDocumentById() {
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id")
-                , Document.of("name", "name"), Document.of("_key", "person:id")));
+        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", id1)
+                , Document.of("name", "name")));
         Optional<Document> id = entity.find("_id");
 
         DocumentQuery query = select().from(COLLECTION_NAME)
                 .where(eq(id.get()))
                 .build();
 
-        List<DocumentEntity> entities = entityManager.select(query);
-        assertFalse(entities.isEmpty());
-        assertThat(entities, contains(entity));
-    }
-
-    @Test
-    public void shouldFindDocumentByKey() {
-        DocumentEntity entity = DocumentEntity.of("person", asList(Document.of("_id", "id")
-                , Document.of("name", "name"), Document.of("_key", "person:id")));
-
-        Optional<Document> id = entity.find("_key");
-        DocumentQuery query = select().from(COLLECTION_NAME)
-                .where(eq(id.get()))
-                .build();
         List<DocumentEntity> entities = entityManager.select(query);
         assertFalse(entities.isEmpty());
         assertThat(entities, contains(entity));

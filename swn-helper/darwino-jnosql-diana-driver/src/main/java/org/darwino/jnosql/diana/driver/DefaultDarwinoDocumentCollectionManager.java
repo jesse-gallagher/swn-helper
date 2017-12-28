@@ -5,7 +5,6 @@ import com.darwino.commons.json.JsonObject;
 import com.darwino.commons.util.StringUtil;
 import com.darwino.jsonstore.Cursor;
 import com.darwino.jsonstore.Store;
-import com.darwino.jsonstore.query.nodes.SpecialFieldNode;
 
 import org.jnosql.diana.api.document.Document;
 import org.jnosql.diana.api.document.DocumentDeleteQuery;
@@ -34,16 +33,14 @@ class DefaultDarwinoDocumentCollectionManager implements DarwinoDocumentCollecti
 	public DocumentEntity insert(DocumentEntity entity) {
 		requireNonNull(entity, "entity is required");
 		JsonObject jsonObject = convert(entity);
-		Document id = entity.find(SpecialFieldNode.UNID).orElseThrow(() -> new DarwinoNoKeyFoundException(entity.toString()));
+		Document id = entity.find(EntityConverter.ID_FIELD).orElseThrow(() -> new DarwinoNoKeyFoundException(entity.toString()));
 
-		String prefix = StringUtil.toString(id.get());
-		jsonObject.put(SpecialFieldNode.UNID, prefix);
+		String unid = StringUtil.toString(id.get());
 		try {
-			System.out.println("Using UNID: " + prefix);
-			com.darwino.jsonstore.Document doc = store.newDocument(prefix);
+			com.darwino.jsonstore.Document doc = store.newDocument(unid);
 			doc.setJson(jsonObject);
 			doc.save();
-			entity.add(Document.of(SpecialFieldNode.UNID, prefix));
+			entity.add(Document.of(EntityConverter.ID_FIELD, unid));
 			return entity;
 		} catch (JsonException e) {
 			throw new RuntimeException(e);
@@ -55,10 +52,12 @@ class DefaultDarwinoDocumentCollectionManager implements DarwinoDocumentCollecti
 		requireNonNull(entity, "entity is required");
 		requireNonNull(ttl, "ttl is required");
 		JsonObject jsonObject = convert(entity);
-		Document id = entity.find(SpecialFieldNode.UNID).orElseThrow(() -> new DarwinoNoKeyFoundException(entity.toString()));
+		Document id = entity.find(EntityConverter.ID_FIELD).orElseThrow(() -> new DarwinoNoKeyFoundException(entity.toString()));
+		String unid = StringUtil.toString(id.get());
+		
 
 		try {
-			com.darwino.jsonstore.Document doc = store.newDocument(id.getName());
+			com.darwino.jsonstore.Document doc = store.newDocument(unid);
 			doc.setJson(jsonObject);
 			doc.save();
 		} catch (JsonException e) {
@@ -69,16 +68,26 @@ class DefaultDarwinoDocumentCollectionManager implements DarwinoDocumentCollecti
 
 	@Override
 	public DocumentEntity update(DocumentEntity entity) {
-		return insert(entity);
+		JsonObject jsonObject = convert(entity);
+		Document id = entity.find(EntityConverter.ID_FIELD).orElseThrow(() -> new DarwinoNoKeyFoundException(entity.toString()));
+
+		String unid = StringUtil.toString(id.get());
+		try {
+			com.darwino.jsonstore.Document doc = store.loadDocument(unid);
+			doc.setJson(jsonObject);
+			doc.save();
+			entity.add(Document.of(EntityConverter.ID_FIELD, unid));
+			return entity;
+		} catch (JsonException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public void delete(DocumentDeleteQuery query) {
 		try {
 			QueryConverter.QueryConverterResult delete = QueryConverter.delete(query, store.getDatabase().getId(), store.getId());
-			if (!delete.getKeys().isEmpty()) {
-				delete.getStatement().deleteAllDocuments(0);
-			}
+			delete.getStatement().deleteAllDocuments(0);
 		} catch (JsonException e) {
 			throw new RuntimeException(e);
 		}
@@ -90,12 +99,9 @@ class DefaultDarwinoDocumentCollectionManager implements DarwinoDocumentCollecti
 			QueryConverter.QueryConverterResult select = QueryConverter.select(query, store.getDatabase().getId(), store.getId());
 			List<DocumentEntity> entities = new ArrayList<>();
 			if (nonNull(select.getStatement())) {
-					entities.addAll(convert(store.openCursor().params(select.getParams())));
+				entities.addAll(convert(select.getStatement().params(select.getParams())));
 			}
-			if (!select.getKeys().isEmpty()) {
-				entities.addAll(convert(select.getKeys(), store));
-			}
-	
+
 			return entities;
 		} catch (JsonException e) {
 			throw new RuntimeException(e);
@@ -145,6 +151,6 @@ class DefaultDarwinoDocumentCollectionManager implements DarwinoDocumentCollecti
 
 	@Override
 	public void close() {
-		
+
 	}
 }

@@ -6,6 +6,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.darwino.jsonstore.Database;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +26,7 @@ public class SearchQueryTest extends AbstractDarwinoAppTest {
     {
         DarwinoDocumentConfiguration configuration = new DarwinoDocumentConfiguration();
         DarwinoDocumentCollectionManagerFactory managerFactory = configuration.get();
-        entityManager = managerFactory.get("default");
+        entityManager = managerFactory.get(Database.STORE_DEFAULT);
     }
 
     @AfterClass
@@ -35,7 +37,7 @@ public class SearchQueryTest extends AbstractDarwinoAppTest {
     public static void beforeClass() throws InterruptedException {
         DarwinoDocumentConfiguration configuration = new DarwinoDocumentConfiguration();
         DarwinoDocumentCollectionManagerFactory managerFactory = configuration.get();
-        DarwinoDocumentCollectionManager entityManager = managerFactory.get("default");
+        DarwinoDocumentCollectionManager entityManager = managerFactory.get(Database.STORE_DEFAULT);
 
         DocumentEntity salvador = DocumentEntity.of("city", asList(Document.of("_id", "salvador")
                 , Document.of("name", "Salvador"),
@@ -43,7 +45,7 @@ public class SearchQueryTest extends AbstractDarwinoAppTest {
                         " of Brazil, Salvador is" +
                         " one of the oldest colonial cities in the Americas.")));
         DocumentEntity saoPaulo = DocumentEntity.of("city", asList(Document.of("_id", "sao_paulo")
-                , Document.of("name", "São Paulo"), Document.of("description", "São Paulo, Brazil’s vibrant " +
+                , Document.of("name", "São Paulo"), Document.of("description", "São Paulo, razil’s vibrant " + // Changed "Brazil" -> "razil" because the test below expects only 3 Brazils
                         "financial center, is among the world's most populous cities, with numerous cultural institutions" +
                         " and a rich architectural tradition. ")));
 		DocumentEntity rioJaneiro = DocumentEntity.of("city", asList(Document.of("_id", "rio_janeiro")

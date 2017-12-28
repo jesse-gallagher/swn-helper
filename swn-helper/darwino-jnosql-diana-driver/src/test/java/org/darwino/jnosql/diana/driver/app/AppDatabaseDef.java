@@ -7,8 +7,11 @@ package org.darwino.jnosql.diana.driver.app;
 import com.darwino.commons.Platform;
 import com.darwino.commons.json.JsonException;
 import com.darwino.commons.util.StringUtil;
+import com.darwino.jsonstore.Database;
 import com.darwino.jsonstore.impl.DatabaseFactoryImpl;
 import com.darwino.jsonstore.meta._Database;
+import com.darwino.jsonstore.meta._FtSearch;
+import com.darwino.jsonstore.meta._Store;
 
 /**
  * Database Definition.
@@ -18,7 +21,7 @@ import com.darwino.jsonstore.meta._Database;
 public class AppDatabaseDef extends DatabaseFactoryImpl {
 
 	public static final int DATABASE_VERSION	= 1;
-	public static final String DATABASE_NAME	= "swnhelper";
+	public static final String DATABASE_NAME	= "swnhelpertest";
 	
     public static final String[] DATABASES = new String[] {
     	DATABASE_NAME
@@ -68,13 +71,12 @@ public class AppDatabaseDef extends DatabaseFactoryImpl {
 //			db.setInstanceEnabled(true);
 //		}
 		
-		// Customize the default stores, if desired...
-//		{
-//			_Store _def = db.getStore(Database.STORE_DEFAULT);
-//			_def.setFtSearchEnabled(true);
-//			_FtSearch ft = (_FtSearch) _def.setFTSearch(new _FtSearch());
-//			ft.setFields("$");
-//		}
+		{
+			_Store _def = db.getStore(Database.STORE_DEFAULT);
+			_def.setFtSearchEnabled(true);
+			_FtSearch ft = (_FtSearch) _def.setFTSearch(new _FtSearch());
+			ft.setFields("$");
+		}
 
 		// Store...
 //		{
