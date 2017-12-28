@@ -15,7 +15,7 @@
 		<module>swn-helper-domino</module>
 		<module>swn-helper-domino-updatesite</module>
 		<module>swn-helper-mobile</module>
-		<module>swn-helper-android-hybrid</module>
+		<!-- <module>swn-helper-android-hybrid</module> -->
 		<module>swn-helper-moe-hybrid</module>
 		<module>swn-helper-swt-hybrid</module>
 	</modules>
