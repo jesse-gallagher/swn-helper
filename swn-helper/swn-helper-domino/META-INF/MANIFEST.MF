@@ -4,7 +4,7 @@ Bundle-Activator: frostillicus.swn.app.AppActivator
 Bundle-ManifestVersion: 2
 Bundle-Name: Stars Without Number Helper
 Bundle-SymbolicName: frostillicus.swn.domino;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0.201712282144
 DARWINO_VERSION: 2.1.0-SNAPSHOT
 Export-Package: frostillicus.swn.app;version="1.0.0",frostillicus.swn.ap
  p.xsp;version="1.0.0"

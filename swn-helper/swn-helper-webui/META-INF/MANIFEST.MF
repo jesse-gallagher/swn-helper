@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: swn-helper-webui
 Bundle-SymbolicName: frostillicus.swn.webui;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0.201712282144
 DARWINO_VERSION: 2.1.0-SNAPSHOT
 Include-Resource: DARWINO-INF/cursors/campaigns.cursor=src/main/resource
  s/DARWINO-INF/cursors/campaigns.cursor,DARWINO-INF/cursors/characters.c
@@ -46,6 +46,7 @@ Include-Resource: DARWINO-INF/cursors/campaigns.cursor=src/main/resource
  8eef5805a46892932ad.woff,DARWINO-INF/resources/assets/index.html=src/ma
  in/resources/DARWINO-INF/resources/assets/index.html,DARWINO-INF/resour
  ces/index.html=src/main/resources/DARWINO-INF/resources/index.html
+Originally-Created-By: Maven Integration for Eclipse
 Private-Package: DARWINO-INF.cursors,DARWINO-INF.resources.assets,DARWIN
  O-INF.resources
 Require-Bundle: com.darwino.domino.libs,com.darwino.domino.platform,fros
