@@ -6,7 +6,6 @@ package org.darwino.jnosql.diana.driver.app.j2ee;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 
@@ -19,10 +18,8 @@ import com.darwino.j2ee.application.DarwinoJ2EEApplication;
 import com.darwino.jsonstore.meta.DatabaseCustomizer;
 import com.darwino.jsonstore.sql.impl.full.JsonDb;
 import com.darwino.platform.DarwinoManifest;
-import com.darwino.rdbc.sqlite.SQLite;
 import com.darwino.sql.drivers.DBDriver;
 import com.darwino.sqlite.JreInstall;
-import com.darwino.sqlite.SQLiteImpl;
 
 /**
  * J2EE application.
