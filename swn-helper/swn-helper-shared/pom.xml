@@ -29,7 +29,16 @@
 			<artifactId>dwo-services-social</artifactId>
 			<version>${DARWINO_VERSION}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.11</version>
+		</dependency>
 		
+		<!--
+			JNoSQL 
+		 -->
 		<dependency>
 			<groupId>org.jnosql.artemis</groupId>
 			<artifactId>artemis-core</artifactId>
@@ -71,7 +80,9 @@
 			<version>1.0</version>
 		</dependency>
 
-		
+		<!--
+			Test dependencies 
+		 -->
 		<dependency>
 			<groupId>com.darwino</groupId>
 			<artifactId>dwo-jre-j2ee-platform</artifactId>

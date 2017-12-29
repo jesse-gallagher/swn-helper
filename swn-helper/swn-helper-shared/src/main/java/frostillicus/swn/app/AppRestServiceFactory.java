@@ -13,6 +13,7 @@ import com.darwino.commons.services.rest.RestServiceFactory;
 import com.darwino.platform.DarwinoHttpConstants;
 
 import frostillicus.swn.app.services.AppInformationRest;
+import frostillicus.swn.app.services.EntitiesService;
 
 
 /**
@@ -36,6 +37,14 @@ public class AppRestServiceFactory extends RestServiceFactory {
 			@Override
 			public HttpService createService(HttpServiceContext context, String[] parts) {
 				return new AppInformationRest();
+			}
+		});
+		
+		
+		binders.add(new RestServiceBinder("entities") {
+			@Override
+			public HttpService createService(HttpServiceContext context, String[] parts) {
+				return new EntitiesService();
 			}
 		});
 	}	
