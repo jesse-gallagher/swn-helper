@@ -20,6 +20,7 @@ import frostillicus.swn.app.model.Player;
 import frostillicus.swn.app.model.PlayerCharacter;
 import frostillicus.swn.app.model.PlayerCharacterRepository;
 import frostillicus.swn.app.model.PlayerRepository;
+import frostillicus.swn.test.runner.WeldContext;
 import frostillicus.swn.test.runner.WeldJUnit4Runner;
 
 @RunWith(WeldJUnit4Runner.class)
@@ -41,6 +42,7 @@ public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 	@Test
 	public void testCreatePlayerCharacter() {
 		try {
+			
 			String playerId = UUID.randomUUID().toString();
 			String pcId = UUID.randomUUID().toString();
 			String homeworldId = UUID.randomUUID().toString();
@@ -103,11 +105,11 @@ public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 			
 			PlayerCharacter pc = pcOptional.get();
 			
-			Optional<Player> playerOptional = pc.getPlayer();
+			Optional<Player> playerOptional = playerRepository.findById(pc.getPlayerId());
 			assertTrue("Should have player", playerOptional.isPresent());
 			System.out.println("Player found: " + playerOptional);
 			
-			Optional<Planet> homeworldOptional = pc.getHomeworld();
+			Optional<Planet> homeworldOptional = planetRepository.findById(pc.getHomeworldId());
 			assertTrue("Should have homeworld", homeworldOptional.isPresent());
 			System.out.println("Homeworld found: " + homeworldOptional);
 			

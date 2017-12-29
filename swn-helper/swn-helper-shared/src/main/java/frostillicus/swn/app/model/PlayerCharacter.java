@@ -1,13 +1,8 @@
 package frostillicus.swn.app.model;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.inject.Inject;
 
 import org.jnosql.artemis.Column;
-import org.jnosql.artemis.Database;
-import org.jnosql.artemis.DatabaseType;
 import org.jnosql.artemis.Embeddable;
 import org.jnosql.artemis.Entity;
 import org.jnosql.artemis.Id;
@@ -140,15 +135,6 @@ public class PlayerCharacter {
 		}
 	}
 	
-
-	@Inject
-	@Database(DatabaseType.DOCUMENT)
-	private PlayerRepository playerRepository;
-	
-	@Inject
-	@Database(DatabaseType.DOCUMENT)
-	private PlanetRepository planetRepository;
-	
 	@Id private String id;
 	
 	@Column private String playerId;
@@ -264,18 +250,6 @@ public class PlayerCharacter {
 	}
 	public void setUnspentSkillPoints(int unspentSkillPoints) {
 		this.unspentSkillPoints = unspentSkillPoints;
-	}
-	
-	// *******************************************************************************
-	// * Encapsulated getters
-	// *******************************************************************************
-	
-	public Optional<Player> getPlayer() {
-		return playerRepository.findById(playerId);
-	}
-	
-	public Optional<Planet> getHomeworld() {
-		return planetRepository.findById(homeworldId);
 	}
 	
 	// *******************************************************************************
