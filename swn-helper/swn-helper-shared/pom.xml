@@ -29,12 +29,75 @@
 			<artifactId>dwo-services-social</artifactId>
 			<version>${DARWINO_VERSION}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.jnosql.artemis</groupId>
+			<artifactId>artemis-core</artifactId>
+			<version>${jnosql-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.darwino</groupId>
+			<artifactId>darwino-jnosql-diana-driver</artifactId>
+			<version>0.0.3-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld.se</groupId>
+			<artifactId>weld-se</artifactId>
+			<version>2.4.6.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.json.bind</groupId>
+			<artifactId>javax.json.bind-api</artifactId>
+			<version>1.0</version>
+		</dependency>
 
-<!-- Remove or comment to not use the Notes/Domino like formula with $atFormula in the query language -->		
+		
 		<dependency>
 			<groupId>com.darwino</groupId>
-			<artifactId>dwo-formula</artifactId>
+			<artifactId>dwo-jre-j2ee-platform</artifactId>
 			<version>${DARWINO_VERSION}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.darwino</groupId>
+			<artifactId>dwo-jre-jsonstore-jdbc-sqlite</artifactId>
+			<version>${DARWINO_VERSION}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.darwino</groupId>
+			<artifactId>dwo-jre-sqlite</artifactId>
+			<version>${DARWINO_VERSION}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.darwino</groupId>
+			<artifactId>dwo-rdbc-sqlite</artifactId>
+			<version>${DARWINO_VERSION}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>2.5</version>
+		    <scope>test</scope>
 		</dependency>
 	</dependencies>
 	

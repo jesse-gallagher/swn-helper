@@ -10,7 +10,7 @@
 
 	<groupId>org.darwino</groupId>
 	<artifactId>darwino-jnosql-diana-driver</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>Darwino driver for JNoSQL Diana</name>
 
 	<properties>
