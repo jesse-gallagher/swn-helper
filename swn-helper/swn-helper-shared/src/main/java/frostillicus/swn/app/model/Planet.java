@@ -5,7 +5,7 @@ import org.jnosql.artemis.Entity;
 import org.jnosql.artemis.Id;
 
 @Entity
-public class Player {
+public class Planet {
 	@Id
 	private String id;
 
@@ -28,6 +28,6 @@ public class Player {
 	
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", name=" + name + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return "Planet [id=" + id + ", name=" + name + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 }

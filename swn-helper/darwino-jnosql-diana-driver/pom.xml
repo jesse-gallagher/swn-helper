@@ -10,11 +10,11 @@
 
 	<groupId>org.darwino</groupId>
 	<artifactId>darwino-jnosql-diana-driver</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>Darwino driver for JNoSQL Diana</name>
 
 	<properties>
-		<diana-version>0.0.3</diana-version>
+		<diana-version>0.0.4-SNAPSHOT</diana-version>
 		<hamcrest-all.version>1.3</hamcrest-all.version>
 	</properties>
 
@@ -26,7 +26,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jnosql.diana</groupId>
-			<artifactId>diana-api</artifactId>
+			<artifactId>diana-core</artifactId>
+			<version>${diana-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jnosql.diana</groupId>
+			<artifactId>diana-document</artifactId>
 			<version>${diana-version}</version>
 		</dependency>
 		<dependency>

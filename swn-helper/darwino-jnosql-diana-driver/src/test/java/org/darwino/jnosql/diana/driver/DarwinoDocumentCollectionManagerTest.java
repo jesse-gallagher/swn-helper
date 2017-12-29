@@ -77,8 +77,12 @@ public class DarwinoDocumentCollectionManagerTest extends AbstractDarwinoAppTest
 		DocumentEntity documentEntity = entityManager.insert(getEntity());
 
 		Optional<Document> name = documentEntity.find("name");
-		DocumentQuery query = select().from(COLLECTION_NAME).where(eq(name.get())).build();
-		DocumentDeleteQuery deleteQuery = DocumentQueryBuilder.delete().from(COLLECTION_NAME).where(eq(name.get())).build();
+		DocumentQuery query = select().from(COLLECTION_NAME)
+				.where("name").eq(name.get().get())
+				.build();
+		DocumentDeleteQuery deleteQuery = DocumentQueryBuilder.delete().from(COLLECTION_NAME)
+				.where("name").eq(name.get().get())
+				.build();
 		entityManager.delete(deleteQuery);
 		assertTrue(entityManager.select(query).isEmpty());
 	}
@@ -91,7 +95,9 @@ public class DarwinoDocumentCollectionManagerTest extends AbstractDarwinoAppTest
 		Thread.sleep(5_00L);
 		Document id = entitySaved.find("_id").get();
 
-		DocumentQuery query = select().from(COLLECTION_NAME).where(eq(id)).build();
+		DocumentQuery query = select().from(COLLECTION_NAME)
+				.where("_id").eq(id.get())
+				.build();
 		DocumentEntity entityFound = entityManager.select(query).get(0);
 		Document subDocument = entityFound.find("phones").get();
 		List<Document> documents = subDocument.get(new TypeReference<List<Document>>() {
@@ -106,7 +112,9 @@ public class DarwinoDocumentCollectionManagerTest extends AbstractDarwinoAppTest
 		DocumentEntity entitySaved = entityManager.insert(entity);
 		Thread.sleep(1_00L);
 		Document id = entitySaved.find("_id").get();
-		DocumentQuery query = select().from(COLLECTION_NAME).where(eq(id)).build();
+		DocumentQuery query = select().from(COLLECTION_NAME)
+				.where("_id").eq(id.get())
+				.build();
 		DocumentEntity entityFound = entityManager.select(query).get(0);
 		System.out.println("shouldSaveSubDocument2 entity found is " + entityFound);
 		Document subDocument = entityFound.find("phones").get();
@@ -127,7 +135,9 @@ public class DarwinoDocumentCollectionManagerTest extends AbstractDarwinoAppTest
 			entityManager.insert(entity);
 			Document id = entity.find("_id").get();
 			Thread.sleep(1_000L);
-			DocumentQuery query = select().from(COLLECTION_NAME).where(eq(id)).build();
+			DocumentQuery query = select().from(COLLECTION_NAME)
+					.where("_id").eq(id.get())
+					.build();
 			DocumentEntity entityFound = entityManager.singleResult(query).get();
 			Optional<Document> foods = entityFound.find("foods");
 			Set<String> setFoods = foods.get().get(new TypeReference<Set<String>>() {

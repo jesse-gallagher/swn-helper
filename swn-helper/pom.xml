@@ -42,7 +42,7 @@
 		<android.platform.maven.version>4.4.2_r4</android.platform.maven.version>
 		<android.platform.sdk.version>19</android.platform.sdk.version>
 		
-		<jnosql-version>0.0.3</jnosql-version>
+		<jnosql-version>0.0.4-SNAPSHOT</jnosql-version>
 	</properties>
 
 	<repositories>
@@ -55,6 +55,16 @@
 			<id>kepler</id>
 			<url>http://download.eclipse.org/releases/kepler/</url>
 			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>snapshots-repo</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 

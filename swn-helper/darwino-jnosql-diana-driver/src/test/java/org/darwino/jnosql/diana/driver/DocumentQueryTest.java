@@ -1,6 +1,5 @@
 package org.darwino.jnosql.diana.driver;
 
-import org.jnosql.diana.api.Sort;
 import org.jnosql.diana.api.document.Document;
 import org.jnosql.diana.api.document.DocumentEntity;
 import org.jnosql.diana.api.document.DocumentQuery;
@@ -17,9 +16,6 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.contains;
-import static org.jnosql.diana.api.Sort.SortType.ASC;
-import static org.jnosql.diana.api.Sort.SortType.DESC;
-import static org.jnosql.diana.api.document.DocumentCondition.eq;
 import static org.jnosql.diana.api.document.query.DocumentQueryBuilder.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -76,7 +72,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
         Optional<Document> name = entity.find("name");
 
         DocumentQuery query = select().from(COLLECTION_NAME)
-                .where(eq(name.get()))
+                .where("name").eq(name.get().get())
                 .limit(2L)
                 .build();
 
@@ -93,7 +89,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
         Optional<Document> name = entity.find("name");
 
         DocumentQuery query = select().from(COLLECTION_NAME)
-                .where(eq(name.get()))
+                .where("name").eq(name.get().get())
                 .start(1L)
                 .build();
         List<DocumentEntity> entities = entityManager.select(query);
@@ -109,7 +105,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
 
         Optional<Document> name = entity.find("name");
         DocumentQuery query = select().from(COLLECTION_NAME)
-                .where(eq(name.get()))
+                .where("name").eq(name.get().get())
                 .start(2L)
                 .limit(2L)
                 .build();
@@ -140,7 +136,9 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
                 , Document.of("name", "name3")));
 
         Optional<Document> name = entity.find("name");
-        DocumentQuery query = select().from(COLLECTION_NAME).where(eq(name.get())).build();
+        DocumentQuery query = select().from(COLLECTION_NAME)
+        		.where("name").eq(name.get().get())
+        		.build();
         List<DocumentEntity> entities = entityManager.select(query);
         assertFalse(entities.isEmpty());
         assertThat(entities, contains(entity));
@@ -154,7 +152,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
         Optional<Document> name = entity.find("name");
 
         DocumentQuery query = select().from(COLLECTION_NAME)
-                .orderBy(Sort.of("name", ASC))
+                .orderBy("name").asc()
                 .build();
 
         List<DocumentEntity> entities = entityManager.select(query);
@@ -175,7 +173,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
         Optional<Document> name = entity.find("name");
 
         DocumentQuery query = select().from(COLLECTION_NAME)
-                .orderBy(Sort.of("name", DESC))
+                .orderBy("name").desc()
                 .build();
         List<DocumentEntity> entities = entityManager.select(query);
         List<String> result = entities.stream().flatMap(e -> e.getDocuments().stream())
@@ -196,7 +194,7 @@ public class DocumentQueryTest extends AbstractDarwinoAppTest  {
         Optional<Document> id = entity.find("_id");
 
         DocumentQuery query = select().from(COLLECTION_NAME)
-                .where(eq(id.get()))
+                .where("_id").eq(id.get().get())
                 .build();
 
         List<DocumentEntity> entities = entityManager.select(query);

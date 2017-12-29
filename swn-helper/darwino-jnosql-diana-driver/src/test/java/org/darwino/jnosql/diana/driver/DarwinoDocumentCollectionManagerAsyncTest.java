@@ -12,14 +12,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.darwino.jsonstore.Database;
-import com.darwino.jsonstore.query.nodes.SpecialFieldNode;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.jnosql.diana.api.document.DocumentCondition.eq;
 import static org.jnosql.diana.api.document.query.DocumentQueryBuilder.delete;
 import static org.jnosql.diana.api.document.query.DocumentQueryBuilder.select;
 import static org.junit.Assert.assertFalse;
@@ -46,8 +44,12 @@ public class DarwinoDocumentCollectionManagerAsyncTest extends AbstractDarwinoAp
 		entityManager = managerFactory.get(Database.STORE_DEFAULT);
 		DocumentEntity documentEntity = getEntity();
 		Optional<Document> id = documentEntity.find("name");
-		DocumentQuery query = select().from(COLLECTION_NAME).where(eq(id.get())).build();
-		DocumentDeleteQuery deleteQuery = delete().from(COLLECTION_NAME).where(eq(id.get())).build();
+		DocumentQuery query = select().from(COLLECTION_NAME)
+				.where("name").eq(id.get().get())
+				.build();
+		DocumentDeleteQuery deleteQuery = delete().from(COLLECTION_NAME)
+				.where("name").eq(id.get().get())
+				.build();
 		entityManagerAsync.delete(deleteQuery);
 	}
 
@@ -58,7 +60,9 @@ public class DarwinoDocumentCollectionManagerAsyncTest extends AbstractDarwinoAp
 
 		Thread.sleep(1_000L);
 		Optional<Document> id = entity.find("name");
-		DocumentQuery query = select().from(COLLECTION_NAME).where(eq(id.get())).build();
+		DocumentQuery query = select().from(COLLECTION_NAME)
+				.where("name").eq(id.get().get())
+				.build();
 		List<DocumentEntity> entities = entityManager.select(query);
 		assertFalse(entities.isEmpty());
 
@@ -82,8 +86,12 @@ public class DarwinoDocumentCollectionManagerAsyncTest extends AbstractDarwinoAp
 	public void shouldRemoveEntityAsync() throws InterruptedException {
 		DocumentEntity documentEntity = entityManager.insert(getEntity());
 		Optional<Document> id = documentEntity.find("name");
-		DocumentQuery query = select().from(COLLECTION_NAME).where(eq(id.get())).build();
-		DocumentDeleteQuery deleteQuery = delete().from(COLLECTION_NAME).where(eq(id.get())).build();
+		DocumentQuery query = select().from(COLLECTION_NAME)
+				.where("name").eq(id.get().get())
+				.build();
+		DocumentDeleteQuery deleteQuery = delete().from(COLLECTION_NAME)
+				.where("name").eq(id.get().get())
+				.build();
 		entityManagerAsync.delete(deleteQuery);
 	}
 

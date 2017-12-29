@@ -11,7 +11,7 @@ import frostillicus.swn.test.app.AppDatabaseDef;
 import frostillicus.swn.test.app.j2ee.AppJ2EEApplication;
 import frostillicus.swn.test.app.j2ee.AppPlugin;
 
-public abstract class AbstractDarwinoAppTest {
+public abstract class AbstractDarwinoModelAppTest {
 
 	@BeforeClass
 	public static void setUpDarwinoApp() throws Exception {
