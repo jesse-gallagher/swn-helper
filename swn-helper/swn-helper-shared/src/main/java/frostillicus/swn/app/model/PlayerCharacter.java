@@ -2,6 +2,9 @@ package frostillicus.swn.app.model;
 
 import java.util.List;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 import org.jnosql.artemis.Column;
 import org.jnosql.artemis.Embeddable;
 import org.jnosql.artemis.Entity;
@@ -107,8 +110,8 @@ public class PlayerCharacter {
 	}
 	@Embeddable
 	public static class Skill {
-		@Column private String name;
-		@Column private int level;
+		@Column @NotEmpty private String name;
+		@Column @Min(0) private int level;
 		
 		public Skill() { }
 		public Skill(String name, int level) {
@@ -135,12 +138,12 @@ public class PlayerCharacter {
 		}
 	}
 	
-	@Id private String id;
+	@Id @NotEmpty private String id;
 	
-	@Column private String playerId;
+	@Column @NotEmpty private String playerId;
 	
-	@Column private String name;
-	@Column private String className;
+	@Column @NotEmpty private String name;
+	@Column private PlayerClass playerClass;
 	@Column private int level;
 	@Column private int experience;
 	@Column private String homeworldId;
@@ -179,11 +182,11 @@ public class PlayerCharacter {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getClassName() {
-		return className;
+	public PlayerClass getPlayerClass() {
+		return playerClass;
 	}
-	public void setClassName(String className) {
-		this.className = className;
+	public void setPlayerClass(PlayerClass playerClass) {
+		this.playerClass = playerClass;
 	}
 	public int getLevel() {
 		return level;
@@ -259,8 +262,8 @@ public class PlayerCharacter {
 	@Override
 	public String toString() {
 		return String.format(
-				"PlayerCharacter [id=%s, playerId=%s, name=%s, className=%s, level=%s, experience=%s, homeworldId=%s, stats=%s, hitPoints=%s, psiPoints=%s, systemStrain=%s, attackBonus=%s, saves=%s, skills=%s, unspentSkillPoints=%s]", //$NON-NLS-1$
-				id, playerId, name, className, level, experience, homeworldId, stats, hitPoints, psiPoints, systemStrain, attackBonus, saves, skills, unspentSkillPoints);
+				"PlayerCharacter [id=%s, playerId=%s, name=%s, playerClass=%s, level=%s, experience=%s, homeworldId=%s, stats=%s, hitPoints=%s, psiPoints=%s, systemStrain=%s, attackBonus=%s, saves=%s, skills=%s, unspentSkillPoints=%s]", //$NON-NLS-1$
+				id, playerId, name, playerClass, level, experience, homeworldId, stats, hitPoints, psiPoints, systemStrain, attackBonus, saves, skills, unspentSkillPoints);
 	}
 	
 	

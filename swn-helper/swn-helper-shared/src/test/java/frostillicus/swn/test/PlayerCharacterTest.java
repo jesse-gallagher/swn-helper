@@ -19,8 +19,8 @@ import frostillicus.swn.app.model.PlanetRepository;
 import frostillicus.swn.app.model.Player;
 import frostillicus.swn.app.model.PlayerCharacter;
 import frostillicus.swn.app.model.PlayerCharacterRepository;
+import frostillicus.swn.app.model.PlayerClass;
 import frostillicus.swn.app.model.PlayerRepository;
-import frostillicus.swn.test.runner.WeldContext;
 import frostillicus.swn.test.runner.WeldJUnit4Runner;
 
 @RunWith(WeldJUnit4Runner.class)
@@ -62,7 +62,7 @@ public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 				pc.setId(pcId);
 				pc.setPlayerId(playerId);
 				pc.setName("Fenton Courtenay Tenison");
-				pc.setClassName("Psychic");
+				pc.setPlayerClass(PlayerClass.PSYCHIC);
 				pc.setLevel(1);
 				pc.setExperience(1300);
 				pc.setHomeworldId(homeworldId);

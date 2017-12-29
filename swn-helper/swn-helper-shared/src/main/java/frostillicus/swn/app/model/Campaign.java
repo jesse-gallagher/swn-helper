@@ -2,6 +2,8 @@ package frostillicus.swn.app.model;
 
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+
 import org.jnosql.artemis.Column;
 import org.jnosql.artemis.Entity;
 import org.jnosql.artemis.Id;
@@ -9,8 +11,10 @@ import org.jnosql.artemis.Id;
 @Entity
 public class Campaign {
 	@Id
+	@NotEmpty
 	private String id;
 	@Column
+	@NotEmpty
 	private String name;
 	@Column
 	private List<String> characterIds;

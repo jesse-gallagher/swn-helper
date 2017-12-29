@@ -8,7 +8,6 @@
 
 	<packaging>pom</packaging>
 	<modules>
-		<module>darwino-jnosql-diana-driver</module>
 		<module>swn-helper-shared</module>
 		<module>swn-helper-webui</module>
 		<module>swn-helper-j2ee</module>

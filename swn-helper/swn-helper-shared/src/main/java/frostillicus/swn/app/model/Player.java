@@ -1,5 +1,7 @@
 package frostillicus.swn.app.model;
 
+import javax.validation.constraints.NotEmpty;
+
 import org.jnosql.artemis.Column;
 import org.jnosql.artemis.Entity;
 import org.jnosql.artemis.Id;
@@ -7,9 +9,11 @@ import org.jnosql.artemis.Id;
 @Entity
 public class Player {
 	@Id
+	@NotEmpty
 	private String id;
 
 	@Column
+	@NotEmpty
 	private String name;
 	
 	public void setId(String id) {
