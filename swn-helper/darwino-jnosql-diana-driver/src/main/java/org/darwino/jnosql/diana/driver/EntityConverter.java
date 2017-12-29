@@ -6,12 +6,10 @@ import org.jnosql.diana.driver.ValueUtil;
 
 import com.darwino.commons.json.JsonArray;
 import com.darwino.commons.json.JsonException;
-import com.darwino.commons.json.JsonJavaFactory;
 import com.darwino.commons.json.JsonObject;
 import com.darwino.commons.util.StringUtil;
 import com.darwino.jsonstore.Cursor;
 import com.darwino.jsonstore.Store;
-import com.darwino.jsonstore.query.nodes.SpecialFieldNode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -88,10 +86,10 @@ final class EntityConverter {
 			if (Map.class.isInstance(value)) {
 				documents.add(Document.of(key, toDocuments(Map.class.cast(value))));
 			} else if (isADocumentIterable(value)) {
-				List<Document> subDocuments = new ArrayList<>();
-				for (Object object : Iterable.class.cast(value)) {
-					subDocuments.addAll(toDocuments(Map.class.cast(object)));
-				}
+				List<List<Document>> subDocuments = new ArrayList<>();
+				stream(Iterable.class.cast(value).spliterator(), false)
+					.map(m -> toDocuments(Map.class.cast(m)))
+					.forEach(e -> subDocuments.add((List<Document>)e));
 				documents.add(Document.of(key, subDocuments));
 			} else {
 				documents.add(Document.of(key, value));
@@ -136,21 +134,35 @@ final class EntityConverter {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static void convertIterable(JsonObject jsonObject, Document d, Object value) {
+	private static void convertIterable(JsonObject jsonObject, Document document, Object value) {
 		JsonObject map = new JsonObject.LinkedMap();
 		JsonArray array = new JsonArray();
-		Iterable.class.cast(value).forEach(o -> {
-			if (Document.class.isInstance(o)) {
-				Document document = Document.class.cast(o);
-				map.put(document.getName(), document.get());
+		Iterable.class.cast(value).forEach(element -> {
+			if(Document.class.isInstance(element)) {
+				Document subDocument = Document.class.cast(element);
+				map.put(subDocument.getName(), subDocument.get());
+			} else if(isSubDocument(element)) {
+				JsonObject subJson = new JsonObject.LinkedMap();
+				stream(Iterable.class.cast(element).spliterator(), false)
+					.forEach(getSubDocument(subJson));
+				array.add(subJson);
 			} else {
-				array.add(o);
+				array.add(element);
 			}
 		});
-		if (array.isEmpty()) {
-			jsonObject.put(d.getName(), map);
+		if(array.isEmpty()) {
+			jsonObject.put(document.getName(), map);
 		} else {
-			jsonObject.put(d.getName(), array);
+			jsonObject.put(document.getName(), array);
 		}
+	}
+	
+	private static Consumer getSubDocument(JsonObject subJson) {
+		return e -> toJsonObject(subJson).accept((Document)e);
+	}
+	
+	private static boolean isSubDocument(Object value) {
+		return value instanceof Iterable && stream(Iterable.class.cast(value).spliterator(), false)
+				.allMatch(d -> org.jnosql.diana.api.document.Document.class.isInstance(d));
 	}
 }
