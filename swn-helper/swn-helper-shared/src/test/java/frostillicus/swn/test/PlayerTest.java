@@ -3,12 +3,10 @@ package frostillicus.swn.test;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.darwino.jnosql.diana.driver.DarwinoDocumentCollectionManager;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import org.jnosql.artemis.document.DocumentTemplate;
 import org.jnosql.diana.api.document.Document;
-import org.jnosql.diana.api.document.DocumentCollectionManager;
 import org.jnosql.diana.api.document.DocumentQuery;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -22,6 +20,7 @@ import static org.jnosql.diana.api.document.query.DocumentQueryBuilder.select;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("nls")
 public class PlayerTest extends AbstractDarwinoAppTest {
 	static Weld weld;
 	static WeldContainer container;

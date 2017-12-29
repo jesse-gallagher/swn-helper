@@ -4,6 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
+import org.darwino.jnosql.diana.driver.DarwinoDocumentCollectionManager;
+import org.darwino.jnosql.diana.driver.DarwinoDocumentCollectionManagerFactory;
 import org.darwino.jnosql.diana.driver.DarwinoDocumentConfiguration;
 import org.jnosql.diana.api.document.DocumentCollectionManager;
 import org.jnosql.diana.api.document.DocumentCollectionManagerFactory;
@@ -14,8 +16,8 @@ import com.darwino.jsonstore.Database;
 @ApplicationScoped
 public class DocumentCollectionManagerProducer {
 
-	private DocumentConfiguration configuration;
-	private DocumentCollectionManagerFactory managerFactory;
+	private DocumentConfiguration<DarwinoDocumentCollectionManagerFactory> configuration;
+	private DocumentCollectionManagerFactory<DarwinoDocumentCollectionManager> managerFactory;
 	
 	@PostConstruct
 	public void init() {
