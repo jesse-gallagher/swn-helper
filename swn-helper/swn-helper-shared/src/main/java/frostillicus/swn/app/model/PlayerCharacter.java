@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.jnosql.artemis.Column;
 import org.jnosql.artemis.Embeddable;
@@ -143,22 +144,22 @@ public class PlayerCharacter {
 	@Column @NotEmpty private String playerId;
 	
 	@Column @NotEmpty private String name;
-	@Column private PlayerClass playerClass;
-	@Column private int level;
-	@Column private int experience;
+	@Column @NotNull private PlayerClass playerClass;
+	@Column @Min(1) private int level;
+	@Column @Min(0) private int experience;
 	@Column private String homeworldId;
 	
-	@Column private Stats stats;
+	@Column @NotNull private Stats stats;
 	
-	@Column private int hitPoints;
-	@Column private int psiPoints;
-	@Column private int systemStrain;
+	@Column @Min(1) private int hitPoints;
+	@Column @Min(0) private int psiPoints;
+	@Column @Min(0) private int systemStrain;
 	
 	@Column private int attackBonus;
-	@Column private Saves saves;
+	@Column @NotNull private Saves saves;
 	
-	@Column private List<Skill> skills;
-	@Column private int unspentSkillPoints;
+	@Column @NotNull private List<Skill> skills;
+	@Column @Min(0) private int unspentSkillPoints;
 	
 	// *******************************************************************************
 	// * Getters/Setters

@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.validation.ConstraintViolationException;
 
 import org.jnosql.artemis.Database;
 import org.jnosql.artemis.DatabaseType;
@@ -66,6 +67,7 @@ public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 				pc.setLevel(1);
 				pc.setExperience(1300);
 				pc.setHomeworldId(homeworldId);
+				pc.setHitPoints(4);
 	
 				PlayerCharacter.Stats stats = new PlayerCharacter.Stats();
 				stats.setStrength(12);
@@ -83,6 +85,7 @@ public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 				saves.setEvasion(15);
 				saves.setTechnology(16);
 				saves.setLuck(14);
+				pc.setSaves(saves);
 				
 				List<PlayerCharacter.Skill> skills = new ArrayList<>();
 				{
@@ -116,6 +119,50 @@ public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@Test
+	public void testCreateInvalidPlayerCharacter() throws Throwable {
+		try {
+			String playerId = UUID.randomUUID().toString();
+			String pcId = UUID.randomUUID().toString();
+			String homeworldId = UUID.randomUUID().toString();
+	
+			{
+				Player player = new Player();
+				player.setId(playerId);
+				player.setName("Foo Fooson");
+				playerRepository.save(player);
+	
+				Planet planet = new Planet();
+				planet.setId(homeworldId);
+				planet.setName("Albion");
+				planetRepository.save(planet);
+	
+				PlayerCharacter pc = new PlayerCharacter();
+				pc.setId(pcId);
+				pc.setPlayerId(playerId);
+				pc.setName("Fenton Courtenay Tenison");
+				pc.setPlayerClass(PlayerClass.PSYCHIC);
+				pc.setLevel(-1);
+				pc.setExperience(1300);
+				pc.setHomeworldId(homeworldId);
+	
+				playerCharacterRepository.save(pc);
+			}
+		} catch(Throwable e) {
+			// Make sure that the root cause is a ConstraintViolationException
+			Throwable t = e;
+			while(t != null) {
+				if(t instanceof ConstraintViolationException) {
+					// Good!
+					return;
+				} else {
+					t = t.getCause();
+				}
+			}
 			throw e;
 		}
 	}
