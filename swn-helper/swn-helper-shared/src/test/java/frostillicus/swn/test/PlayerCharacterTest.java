@@ -32,7 +32,6 @@ import frostillicus.swn.test.runner.WeldJUnit4Runner;
 public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 	
 	@Inject
-	@Database(DatabaseType.DOCUMENT)
 	private PlayerRepository playerRepository;
 	
 	@Inject
@@ -40,7 +39,6 @@ public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 	private PlanetRepository planetRepository;
 	
 	@Inject
-	@Database(DatabaseType.DOCUMENT)
 	private PlayerCharacterRepository playerCharacterRepository;
 
 	@Test

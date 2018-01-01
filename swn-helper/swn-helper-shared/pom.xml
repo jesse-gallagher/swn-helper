@@ -21,11 +21,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.darwino</groupId>
-			<artifactId>dwo-jsonstore-sql-jsql</artifactId>
-			<version>${DARWINO_VERSION}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.darwino</groupId>
 			<artifactId>dwo-services-social</artifactId>
 			<version>${DARWINO_VERSION}</version>
 		</dependency>
@@ -57,6 +52,11 @@
 		<dependency>
 			<groupId>org.darwino</groupId>
 			<artifactId>darwino-jnosql-diana-driver</artifactId>
+			<version>${jnosql-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.darwino</groupId>
+			<artifactId>darwino-jnosql-artemis-extension</artifactId>
 			<version>${jnosql-version}</version>
 		</dependency>
 		<dependency>
@@ -118,6 +118,12 @@
 		<dependency>
 			<groupId>com.darwino</groupId>
 			<artifactId>dwo-rdbc-sqlite</artifactId>
+			<version>${DARWINO_VERSION}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.darwino</groupId>
+			<artifactId>dwo-jsonstore-sql-jsql</artifactId>
 			<version>${DARWINO_VERSION}</version>
 			<scope>test</scope>
 		</dependency>

@@ -1,5 +1,12 @@
 package frostillicus.swn.app.model;
 
-import org.jnosql.artemis.Repository;
+import java.util.List;
+import java.util.Optional;
 
-public interface PlayerRepository extends Repository<Player, String> { }
+import org.darwino.jnosql.artemis.extension.DarwinoRepository;
+
+public interface PlayerRepository extends DarwinoRepository<Player, String> {
+	public List<Player> findAll();
+	
+	public Optional<Player> findByName(String name);
+}
