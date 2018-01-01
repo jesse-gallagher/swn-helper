@@ -3,6 +3,8 @@ package frostillicus.swn.test.runner;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
 
+import frostillicus.swn.app.WeldContext;
+
 public class WeldJUnit4Runner extends BlockJUnit4ClassRunner {
 
     public WeldJUnit4Runner(Class<Object> clazz) throws InitializationError {

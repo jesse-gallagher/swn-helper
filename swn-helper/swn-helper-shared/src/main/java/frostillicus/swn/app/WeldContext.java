@@ -1,4 +1,4 @@
-package frostillicus.swn.test.runner;
+package frostillicus.swn.app;
 
 import java.lang.annotation.Annotation;
 

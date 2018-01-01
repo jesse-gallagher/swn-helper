@@ -1,5 +1,6 @@
 package frostillicus.swn.test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import org.jnosql.artemis.Database;
 import org.jnosql.artemis.DatabaseType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.darwino.commons.util.StringUtil;
 
 import frostillicus.swn.app.model.Planet;
 import frostillicus.swn.app.model.PlanetRepository;
@@ -44,25 +47,22 @@ public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 	public void testCreatePlayerCharacter() {
 		try {
 			
-			String playerId = UUID.randomUUID().toString();
-			String pcId = UUID.randomUUID().toString();
-			String homeworldId = UUID.randomUUID().toString();
-
+			String playerId;
+			String homeworldId;
+			String pcId;
 			{
 				Player player = new Player();
-				player.setId(playerId);
 				player.setName("Foo Fooson");
-				playerRepository.save(player);
+				playerId = playerRepository.save(player).getId();
+				
 	
 				Planet planet = new Planet();
-				planet.setId(homeworldId);
 				planet.setName("Albion");
-				planetRepository.save(planet);
+				homeworldId = planetRepository.save(planet).getId();
 	
 				PlayerCharacter pc = new PlayerCharacter();
-				pc.setId(pcId);
-				pc.setPlayerId(playerId);
 				pc.setName("Fenton Courtenay Tenison");
+				pc.setPlayerId(playerId);
 				pc.setPlayerClass(PlayerClass.PSYCHIC);
 				pc.setLevel(1);
 				pc.setExperience(1300);
@@ -99,7 +99,9 @@ public class PlayerCharacterTest extends AbstractDarwinoModelAppTest {
 				}
 				pc.setSkills(skills);
 	
-				playerCharacterRepository.save(pc);
+				PlayerCharacter saved = playerCharacterRepository.save(pc);
+				pcId = saved.getId();
+				assertFalse("PlayerCharacter ID should not be empty", StringUtil.isEmpty(pcId));
 			}
 			
 			Optional<PlayerCharacter> pcOptional = playerCharacterRepository.findById(pcId);

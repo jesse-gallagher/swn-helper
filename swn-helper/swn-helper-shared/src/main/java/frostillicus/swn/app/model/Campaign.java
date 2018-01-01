@@ -11,7 +11,6 @@ import org.jnosql.artemis.Id;
 @Entity
 public class Campaign {
 	@Id
-	@NotEmpty
 	private String id;
 	@Column
 	@NotEmpty

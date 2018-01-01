@@ -139,7 +139,7 @@ public class PlayerCharacter {
 		}
 	}
 	
-	@Id @NotEmpty private String id;
+	@Id private String id;
 	
 	@Column @NotEmpty private String playerId;
 	

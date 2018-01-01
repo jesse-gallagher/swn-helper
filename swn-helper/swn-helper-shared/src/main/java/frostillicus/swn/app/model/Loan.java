@@ -9,7 +9,6 @@ import org.jnosql.artemis.Id;
 @Entity
 public class Loan {
 	@Id
-	@NotEmpty
 	private String id;
 	
 	@Column

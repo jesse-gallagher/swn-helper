@@ -9,7 +9,6 @@ import org.jnosql.artemis.Id;
 @Entity
 public class Faction {
 	@Id
-	@NotEmpty
 	private String id;
 	
 	@Column
